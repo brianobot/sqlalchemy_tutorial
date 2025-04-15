@@ -96,6 +96,17 @@ def main():
 
         print(f"{first_user.addresses[-1].address = }")
 
+        # use the session's add_all method to add multiple objects of the same type
+        users = [User(username=f"username_{i}", email=f"email{i}@gmail.com") for i in range(3)]
+        addresses = [Address(user=first_user, address=f"address {i}") for i in range(3)]
+
+        session.add_all(users)
+        session.add_all(addresses)
+
+        # this is also possible, interesting stuffs
+        mixed_classes = users + addresses
+        session.add_all(mixed_classes)
+
 
 if __name__ == "__main__":
     main()
